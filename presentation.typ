@@ -36,14 +36,13 @@ Links:
 // #set text(font: "Fira Mono")
 // #show raw: it => block(
 //   inset: 8pt,
-//   text(fill: foreground, font: "Fira Mono", it)
+//   text(fill: foreground, font: "Fira Mono", it),
 //   radius: 5pt,
 //   fill: rgb("#1d2433"),
 // )
 
 #title-slide[
-  = Your optimizing compiler is not smart enough.
-  To hell with multiple recursions. Is there a gap in compiler theory?
+  = Your Optimizing Compiler is not Optimizing Enough. To hell with Multiple Recursions!
   #v(2em)
 
   Federico Bruzzone, #footnote[
@@ -88,35 +87,50 @@ Links:
 ]
 
 
-#centered-slide[
-    = Optimizing Compilers as Musical Compositions
+#simple-slide[
+    ===== Optimizing Compilers as Musical Compositions
 
-    #v(2em)
+    #toolbox.side-by-side(columns: (2fr, 1fr))[
+      #align(horizon + center)[
+      Compilers are frequently perceived as intricate musical compositions---like the unfinished _J. S. Bach’s Art of Fugue_---where mathematical precision and logical interplay guide each part.
 
-
-    Compilers are frequently perceived as intricate musical compositions---like the unfinished _J. S. Bach’s Art of Fugue_---where mathematical precision and logical interplay guide each part.
-
-    Every module enters in perfect timing, weaving together a structure that only the keenest ears can fully grasp.
+      Every module enters in perfect timing, weaving together a structure that only the keenest ears can fully grasp.
+      ]
+    ][
+      #figure(
+        image("images/opt-comp.png", width: 81%),
+        numbering: none,
+        caption: [#text(tiny-size)[Bacon _et al._, CSUR 1994 @Bacon94]]
+      )
+    ]
 ]
 
 #simple-slide[
-  ===== Optimizing Compiler Infrastructure
+  ===== Machine Learning Framework are Just Optimizing Compilers
 
-  #toolbox.side-by-side(columns: (3fr, 1fr))[
-    #figure(
-      image("images/opt-comp.png", width: 35%),
-      numbering: none,
-      caption: [#text(tiny-size)[From Bacon _et al._ @Bacon94]]
-    )
-  ][
-    TODO
+  #align(horizon + center)[
+      #figure(
+        image("images/ml-comp.png", width: 59%),
+        numbering: none,
+        caption: []
+      )
   ]
-
-
 ]
 
 #simple-slide[
-  = Peephole Optimizations #text(tiny-size)[(widely studied since the 1960s @McKeeman65 @Tanenbaum82)]
+  ===== Machine Learning Framework (Cont.)
+
+  #align(horizon + center)[
+      #figure(
+        image("images/ml-comp2.png", width: 73%),
+        numbering: none,
+        caption: [#text(tiny-size)[Li _et al._, CSUR 2020, @Li20]]
+      )
+  ]
+]
+
+#simple-slide[
+  = Peephole Optimizations #text(tiny-size)[(cf. @McKeeman65 @Tanenbaum82)]
 
   #v(1em)
 
@@ -242,7 +256,7 @@ Links:
 
   #align(horizon)[
     #figure(
-      image("images/loop-tiling.png", width: 80%),
+      image("images/loop-tiling.png", width: 88%),
       numbering: none,
       caption: []
     )
@@ -271,9 +285,8 @@ Links:
     ]
 ]
 
-#slide[
-    = Tail Recursive Factorial Function
-
+#centered-slide[
+    = Tail-recursive Factorial Function
     #toolbox.side-by-side(columns: (40%, 60%))[
       #align(horizon)[#text(small-size)[
         #codly(highlights: (
@@ -302,49 +315,45 @@ Links:
     #align(horizon)[#text(tiny-size)[
       #codly(highlights: (
         (line: 3, start: 3, fill: green),
-        (line: 15, start: 3, fill: green),
+        (line: 11, start: 3, fill: green),
 
         (line: 4, start: 3, end: 13, fill: red),
-        (line: 16, start: 3, end: 12, fill: red),
+        (line: 12, start: 3, end: 12, fill: red),
 
-        (line: 18, start: 29, end: 29, fill: blue),
+        (line: 14, start: 29, end: 29, fill: blue),
 
         (line: 4, start: 16, end: 28, fill: yellow),
-        (line: 16, start: 15, end: 27, fill: yellow),
-        (line: 17, start: 0, end: 7, fill: yellow),
-        (line: 19, start: 3, end: 5, fill: yellow),
+        (line: 12, start: 15, end: 27, fill: yellow),
+        (line: 13, start: 0, end: 7, fill: yellow),
+        (line: 15, start: 3, end: 5, fill: yellow),
 
-        (line: 13, start: 3, fill: orange),
-        (line: 11, start: 3, end: 8, fill: orange),
-        (line: 11, start: 22, end: 25, fill: orange),
+        (line: 9, start: 3, fill: orange),
+        (line: 7, start: 3, end: 8, fill: orange),
+        (line: 7, start: 22, end: 25, fill: orange),
 
-        (line: 12, start: 3, end: 10, fill: teal),
-        (line: 12, start: 24, end: 27, fill: teal),
+        (line: 8, start: 3, end: 10, fill: teal),
+        (line: 8, start: 24, end: 27, fill: teal),
 
-        (line: 14, start: 3, end: 6, fill: teal),
-        (line: 14, start: 10, end: 20, fill: fuchsia),
-        (line: 14, start: 22, end: 27, fill: orange),
-        (line: 14, start: 30, fill: teal),
+        (line: 10, start: 3, end: 6, fill: teal),
+        (line: 10, start: 10, end: 20, fill: fuchsia),
+        (line: 10, start: 22, end: 27, fill: orange),
+        (line: 10, start: 30, fill: teal),
 
-        (line: 18, start: 67, end: 70, fill: teal),
+        (line: 14, start: 67, end: 70, fill: teal),
 
-        (line: 9, start: 12, fill: maroon.lighten(80%)),
-        (line: 10, start: 0, fill: maroon.lighten(80%)),
-        (line: 11, start: 28, end: 35, fill: maroon.lighten(80%)),
-        (line: 12, start: 30, end: 37, fill: maroon.lighten(80%)),
-        (line: 16, start: 30, fill: maroon.lighten(80%)),
-        (line: 18, start: 73, end: 80, fill: maroon.lighten(80%)),
+        (line: 4, start: 31, end: 44, fill: maroon.lighten(80%)),
+        (line: 6, start: 0, fill: maroon.lighten(80%)),
+        (line: 7, start: 28, end: 35, fill: maroon.lighten(80%)),
+        (line: 8, start: 30, end: 37, fill: maroon.lighten(80%)),
+        (line: 12, start: 30, fill: maroon.lighten(80%)),
+        (line: 14, start: 73, end: 80, fill: maroon.lighten(80%)),
       ))
-      ```LLVM
+      ```
       define i32 @fact(int)(i32 %n)  {
       entry:
         %cmp3 = icmp eq i32 %n, 0
-        br i1 %cmp3, label %return, label %if.else.preheader7 ; label %if.else.preheader
-      ; if.else.preheader: vector.ph: vector.body: middle.block:
-      if.else.preheader7:
-        %n.tr5.ph = phi i32 [ %n, %if.else.preheader ], [ %0, %middle.block ]
-        %acc.tr4.ph = phi i32 [ 1, %if.else.preheader ], [ %4, %middle.block ]
-        br label %if.else
+        br i1 %cmp3, label %return, label %if.else ; label %if.else.preheader
+      ; if.else.preheader -> vector.ph -> vector.body -> middle.block -> if.else.preheader7
       if.else:
         %n.tr5 = phi i32 [ %sub, %if.else ], [ %n.tr5.ph, %if.else.preheader7 ]
         %acc.tr4 = phi i32 [ %mul, %if.else ], [ %acc.tr4.ph, %if.else.preheader7 ]
@@ -359,8 +368,6 @@ Links:
       ```
     ]]]
 ]
-
-
 
 
 // #slide[
