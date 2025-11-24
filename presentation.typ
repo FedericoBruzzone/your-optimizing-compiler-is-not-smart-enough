@@ -62,6 +62,27 @@ Links:
 ]
 
 #simple-slide[
+
+    #toolbox.side-by-side(columns: (2fr, 1fr))[
+      #align(horizon + center)[
+      === Compilers as Musical Compositions
+
+      #v(1em)
+
+      Compilers are frequently perceived as intricate musical compositions---like the unfinished _J. S. Bach’s Art of Fugue_---where mathematical precision and logical interplay guide each part.
+
+      Every module enters in perfect timing, weaving together a structure that only the keenest ears can fully grasp.
+      ]
+    ][
+      #figure(
+        image("images/opt-comp.png", width: 98%),
+        numbering: none,
+        caption: [#text(tiny-size)[Bacon _et al._, CSUR 1994 @Bacon94]]
+      )
+    ]
+]
+
+#simple-slide[
   = Premature Optimizations
 
   #v(2em)
@@ -83,27 +104,26 @@ Links:
 
 
 #focus-slide[
-    In the absence of either empirically measured or theoretically justified performance issues, programmers should *avoid* making optimizations based *solely* on assumptions about potential performance gains.
+  In the absence of either empirically measured or theoretically justified performance issues, programmers should *avoid* making optimizations based *solely* on assumptions about potential performance gains.
+]
+
+#centered-slide[
+  = Optimizing Compilers
+
+  #v(1em)
+
+  #one-by-one(start: 1, mode: gray)[
+    Compilers use information collected during _analysis passes_ to guide _transformations_.
+  ][
+
+    Compiler optimizations are such transformations (say meaning-preserving mappings [164]) applied to the input code to improve certain aspects—such as performance, resource utilization, and power consumption [2, 159]—without altering its observable behavior [80].
+  ][
+
+    In accordance with the literature [6, 214], such compilers are referred to as *optimizing compilers*.
+  ]
 ]
 
 
-#simple-slide[
-    ===== Optimizing Compilers as Musical Compositions
-
-    #toolbox.side-by-side(columns: (2fr, 1fr))[
-      #align(horizon + center)[
-      Compilers are frequently perceived as intricate musical compositions---like the unfinished _J. S. Bach’s Art of Fugue_---where mathematical precision and logical interplay guide each part.
-
-      Every module enters in perfect timing, weaving together a structure that only the keenest ears can fully grasp.
-      ]
-    ][
-      #figure(
-        image("images/opt-comp.png", width: 81%),
-        numbering: none,
-        caption: [#text(tiny-size)[Bacon _et al._, CSUR 1994 @Bacon94]]
-      )
-    ]
-]
 
 #simple-slide[
   ===== Machine Learning Framework are Just Optimizing Compilers
