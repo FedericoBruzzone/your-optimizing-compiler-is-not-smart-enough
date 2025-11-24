@@ -19,7 +19,7 @@ Links:
 
 #show: fcb-theme.with(
   aspect-ratio: "16-9",
-  header: [#align(center)[_Your optimizing compiler is *not* smart enough. To hell with *multiple recursions*. Is there a *gap* in compiler theory?_]],
+  header: [#align(center)[_Your Optimizing Compiler is *Not* Optimizing Enough. To Hell with *Multiple Recursions*!_]],
   footer: [Federico Bruzzone -- Università degli Studi di Milano],
   background: background,
   foreground: foreground,
@@ -93,13 +93,26 @@ Links:
 
     #v(2em)
 
+
     Compilers are frequently perceived as intricate musical compositions---like the unfinished _J. S. Bach’s Art of Fugue_---where mathematical precision and logical interplay guide each part.
 
     Every module enters in perfect timing, weaving together a structure that only the keenest ears can fully grasp.
 ]
 
 #simple-slide[
-  = Example of Compiler Rules
+  ===== Optimizing Compiler Infrastructure
+
+  #toolbox.side-by-side(columns: (3fr, 1fr))[
+    #figure(
+      image("images/opt-comp.png", width: 35%),
+      numbering: none,
+      caption: [#text(tiny-size)[From Bacon _et al._ @Bacon94]]
+    )
+  ][
+    TODO
+  ]
+
+
 ]
 
 #simple-slide[
@@ -222,6 +235,20 @@ Links:
         ]]]]
     ]
   ]
+]
+
+#simple-slide[
+  = Loop Tiling Visualization
+
+  #align(horizon)[
+    #figure(
+      image("images/loop-tiling.png", width: 80%),
+      numbering: none,
+      caption: []
+    )
+  ]
+
+
 ]
 
 #simple-slide[
