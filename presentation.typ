@@ -11,7 +11,6 @@ Links:
 #codly(number-format: none)
 #codly(languages: codly-languages)
 
-
 #let background = white // silver
 #let foreground = navy
 #let link-background = maroon // eastern
@@ -113,39 +112,37 @@ Links:
   #v(1em)
 
   #one-by-one(start: 1, mode: gray)[
-    Compilers use information collected during _analysis passes_ to guide _transformations_.
+    Compilers use information collected during analysis passes to guide transformations @Cooper22 @Kennedy01b.
   ][
 
-    Compiler optimizations are such transformations (say meaning-preserving mappings [164]) applied to the input code to improve certain aspects—such as performance, resource utilization, and power consumption [2, 159]—without altering its observable behavior [80].
+    *Compiler optimizations* are such transformations (say _meaning-preserving mappings_ @Paige97) applied to the input code to improve certain aspects---such as performance, resource utilization, and power consumption---without altering its observable behavior.
   ][
 
-    In accordance with the literature [6, 214], such compilers are referred to as *optimizing compilers*.
+    In accordance with the literature @Allen66 @Wulf73, such compilers are referred to as *optimizing compilers*.
   ]
 ]
 
 
 
 #simple-slide[
-  ===== Machine Learning Framework are Just Optimizing Compilers
-
-  #align(horizon + center)[
-      #figure(
-        image("images/ml-comp.png", width: 59%),
-        numbering: none,
-        caption: []
-      )
+  ===== Machine Learning Framework are Just Optimizing Compilers #footnote[
+        Li _et al._, CSUR 2020, @Li20 compiled a comprehensive survey on deep learning compilers.
   ]
-]
 
-#simple-slide[
-  ===== Machine Learning Framework (Cont.)
-
-  #align(horizon + center)[
-      #figure(
-        image("images/ml-comp2.png", width: 73%),
-        numbering: none,
-        caption: [#text(tiny-size)[Li _et al._, CSUR 2020, @Li20]]
-      )
+  #move(dx: 3cm)[
+  #toolbox.side-by-side(columns: (1fr, 3fr))[
+    #figure(
+      image("images/ml-comp-cg.png", width: 170%),
+      numbering: none,
+      caption: []
+    )
+  ][
+    #figure(
+      image("images/ml-comp.png", width: 70%),
+      numbering: none,
+      caption: []
+    )
+  ]
   ]
 ]
 
@@ -281,8 +278,6 @@ Links:
       caption: []
     )
   ]
-
-
 ]
 
 #simple-slide[
@@ -295,8 +290,7 @@ Links:
         Guy L. Steele, Jr. in 1977 observed that *tail-recursive procedure calls* can be optimized to avoid growing the call stack @Steele77:
 
         _In general, procedure calls may be usefully thought of as GOTO statements which also pass parameters, and can be uniformly coded as [machine code] JUMP instructions._
-    ]
-    ][
+    ]][
       #figure(
         image("images/steele.jpg", width: 100%),
         numbering: none,
@@ -306,7 +300,10 @@ Links:
 ]
 
 #centered-slide[
-    = Tail-recursive Factorial Function
+    ===== Tail-recursive Factorial Function
+
+    #v(1em)
+
     #toolbox.side-by-side(columns: (40%, 60%))[
       #align(horizon)[#text(small-size)[
         #codly(highlights: (

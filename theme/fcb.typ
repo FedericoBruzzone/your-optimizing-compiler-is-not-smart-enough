@@ -84,7 +84,6 @@
   body
 }
 
-
 #let centered-slide(body) = {
   slide(align(center + horizon, body))
 }
@@ -123,17 +122,17 @@
           dir: ltr,
           fcb-footer.get(),
           h(1fr),
-          move(
-            dy: 2pt,
-            toolbox.progress-ratio(ratio => {
-              stack(
-                dir: ltr,
-                rect(stroke: fcb-header-footer-foreground.get(), fill: fcb-header-footer-foreground.get(), width: ratio * 150pt),
-                rect(stroke: fcb-header-footer-foreground.get(), fill: none, width: (1 - ratio) * 150pt)
-              )
-            }),
-          ),
-          h(10pt),
+          // move(
+          //   dy: 2pt,
+          //   toolbox.progress-ratio(ratio => {
+          //     stack(
+          //       dir: ltr,
+          //       rect(stroke: fcb-header-footer-foreground.get(), fill: fcb-header-footer-foreground.get(), width: ratio * 150pt),
+          //       rect(stroke: fcb-header-footer-foreground.get(), fill: none, width: (1 - ratio) * 150pt)
+          //     )
+          //   }),
+          // ),
+          // h(10pt),
           toolbox.slide-number + " / " + toolbox.last-slide-number
         )
       })
