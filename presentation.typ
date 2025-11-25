@@ -108,13 +108,15 @@ Links:
 #centered-slide[
   = Optimizing Compilers
 
-  #v(1em)
+  #v(0.5em)
 
   #one-by-one(start: 1, mode: gray)[
     Compilers use information collected during analysis passes to guide transformations @Cooper22 @Kennedy01b.
   ][
 
-    *Compiler optimizations* are such transformations (say _meaning-preserving mappings_ @Paige97) applied to the input code to improve certain aspects---such as performance, resource utilization, and power consumption---without altering its observable behavior.
+    *Compiler optimizations*#footnote[
+        A _chronologically_ sorted list of papers on compiler optimization, from the works of 1952 through the techniques of 1994, is available at @Bruzzone2025papers.
+      ] are such transformations (say _meaning-preserving mappings_ @Paige97) applied to the input code to improve certain aspects---such as performance, resource utilization, and power consumption---without altering its observable behavior.
   ][
 
     In accordance with the literature @Allen66 @Wulf73, such compilers are referred to as *optimizing compilers*.
@@ -125,9 +127,9 @@ Links:
 
 #simple-slide[
   ===== Machine Learning Framework are Just Optimizing Compilers #footnote[
-        Li _et al._, CSUR 2020, @Li20 compiled a comprehensive survey on deep learning compilers.
+        TensorFlow XLA, NVIDIA CUDA Compiler (NVCC), MLIR, and TVM all use *LLVM* @Lattner04.
+        Li _et al._, @Li20 compiled a survey on ML compilers.
   ]
-
   #move(dx: 3cm)[
   #toolbox.side-by-side(columns: (1fr, 3fr))[
     #figure(
@@ -279,11 +281,12 @@ Links:
 ]
 
 #simple-slide[
-  = Loop Tiling Visualization
-
+  = Loop Tiling Visualization#footnote(
+    link("https://colfaxresearch.com/how-series/#ses-10")[A. Vladimirov, Session 10 --- Access to Caches and Memory]
+  )
   #align(horizon)[
     #figure(
-      image("images/loop-tiling.png", width: 88%),
+      image("images/loop-tiling.png", width: 78%),
       numbering: none,
       caption: []
     )
@@ -474,5 +477,7 @@ Links:
 ]
 
 // #hidden-bibliography(
-#bibliography("local.bib")
+#text(small-size)[
+  #bibliography("local.bib")
+]
 // )
