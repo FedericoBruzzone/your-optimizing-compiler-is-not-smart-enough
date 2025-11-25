@@ -1,4 +1,4 @@
-# Your Optimizing Compiler is Not Optimizing Enough. To Hell With Multiple Recursion! 
+# Your Optimizing Compiler is Not Optimizing Enough. To Hell With Multiple Recursions! 
 
 This repository contains the presentation of the first MuseMI meeting of the 2025/2026 season, held in Milan on December 4, 2025.
 
