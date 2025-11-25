@@ -18,7 +18,7 @@ Links:
 
 #show: fcb-theme.with(
   aspect-ratio: "16-9",
-  header: [#align(center)[_Your Optimizing Compiler is *Not* Optimizing Enough. To Hell with *Multiple Recursions*!_]],
+  header: [#align(center)[_Your Optimizing Compiler is *Not* Optimizing Enough. To Hell With *Multiple Recursions*!_]],
   footer: [Federico Bruzzone -- Università degli Studi di Milano],
   background: background,
   foreground: foreground,
@@ -41,7 +41,7 @@ Links:
 // )
 
 #title-slide[
-  = Your Optimizing Compiler is not Optimizing Enough. To hell with Multiple Recursions!
+  = Your Optimizing Compiler is Not Optimizing Enough. To Hell With Multiple Recursions!
   #v(2em)
 
   Federico Bruzzone, #footnote[
