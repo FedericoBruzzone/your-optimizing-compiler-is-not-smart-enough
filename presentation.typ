@@ -162,7 +162,7 @@ Links:
             (line: 3, start: 0, fill: red),
           ))
           ```asm
-          ; x = x * 2  x: i32
+          ; x = x * 2, s.t. x: i32
           mov     eax, dword ptr [rbp - 4]
           imul    eax, 2
           mov     dword ptr [rbp - 4], eax
@@ -175,7 +175,7 @@ Links:
             (line: 3, start: 0, fill: green),
           ))
           ```asm
-          ; x = x << 1
+          ; x = x << 1, s.t. x: i32
           mov    eax, dword ptr [rbp - 4]
           shl    eax
           mov    dword ptr [rbp - 4], eax
@@ -188,7 +188,7 @@ Links:
           (line: 3, start: 0, fill: red),
         ))
         ```asm
-        ; x = x + 0
+        ; x = x + 0, s.t. x: i32
         mov     eax, dword ptr [rbp - 4]
         add     eax, 0
         mov     dword ptr [rbp - 4], eax
@@ -219,11 +219,11 @@ Links:
 ]
 
 #simple-slide[
-  = Loop Nest Optimizations --- Loop Tiling #text(tiny-size)[(cf. @Wolfe89 @Wolf91b)]
+  ===== Loop Nest Optimizations --- Loop Tiling #text(tiny-size)[(cf. @Wolfe89 @Wolf91b)]
 
   #v(1em)
 
-  #toolbox.side-by-side(columns: (40%, 60%))[
+  #toolbox.side-by-side(columns: (40%, 20%, 40%))[
     #align(horizon)[#text(small-size)[
     #one-by-one(start: 1)[
       #codly(highlights: (
@@ -244,39 +244,64 @@ Links:
       ]
     ]
   ]]][
+    #move(dx: -20pt, dy: 40pt)[
+        #figure(
+          image("images/loop-tiling-raw.png", width: 78%),
+          numbering: none,
+          caption: [#text(tiny-size)[#link("https://colfaxresearch.com/how-series/#ses-10")[A. Vladimirov, Session 10]]]
+        )
+    ]
+  ][
     #one-by-one(start: 2)[
-      #align(horizon)[#text(small-size)[
-      #codly(highlights: (
-        (line: 1, start: 0, end: 11, fill: green),
-        (line: 2, start: 22, end: 27, fill: green),
-        (line: 4, start: 24, end: 38, fill: green),
-      ))
-        ```cpp
-        int TS = 16; // Tile Size
-        for (int jj=0; jj<m; jj+=TS) {
-          for (int i=0; i<n; ++i) {
-              for (int j=jj; j<MIN(jj + TS, m); ++j) {
-                  c[i][j] = a[i] * b[j];
-              }
-          }
-        }
-        ```
-
-        #align(center)[
-          The inner loop works on a *tile* of `b` that fits into the cache.
+      #move(dx: -50pt)[
+        #align(horizon + center)[#text(tiny-size)[
+          #codly(highlights: (
+            (line: 1, start: 0, fill: green),
+          ))
+          ```cpp
+          int TILE_SIZE = 16;
+          ```
         ]]]
     ][
-      #align(horizon)[#text(small-size)[
-        #align(center)[
-          #block(
-            fill: red.lighten(80%),
-            stroke: red,
-            inset: 5pt,
-            radius: 5pt
-          )[
-            But, the values for the array `a` will be read `m / TS` times!
-        ]]]]
-    ]
+      #move(dx: -50pt)[
+        #align(center)[#text(tiny-size)[
+          The inner loop works on a *tile* of `b` that fits into the cache.
+        #codly(highlights: (
+          (line: 2, start: 22, end: 27, fill: green),
+          (line: 4, start: 24, end: 38, fill: green),
+        ))
+        ```cpp
+        for (int jj=0; jj<m; jj+=TILE_SIZE)
+            for (int i=0; i<n; ++i)
+                for (int j=jj; j<min(jj + TILE_SIZE, m); ++j)
+                    c[i][j] = a[i] * b[j];
+        ```
+
+        #block(
+          fill: red.lighten(80%),
+          stroke: red,
+          inset: 5pt,
+          radius: 5pt
+        )[
+          But, the values for the array `a` will be read `m / TS` times!
+        ]
+      ]]]
+      #move(dx: -50pt)[
+        #text(tiny-size)[
+        #codly(highlights: (
+          (line: 1, start: 0, end: 11, fill: green),
+          (line: 2, start: 22, end: 27, fill: green),
+          (line: 4, start: 24, end: 38, fill: green),
+        ))
+          ```cpp
+          for (int ii = 0; ii < n; ii += TILE_SIZE_I)
+            for (int jj = 0; jj < m; jj += TILE_SIZE_J)
+              for (int i = ii; i < MIN(n, ii + TILE_SIZE_I); i++)
+                for (int j = jj; j < MIN(m, jj + TILE_SIZE_J); j++)
+                  c[i][j] = a[i] * b[j];
+          ```
+        ]]
+      ]
   ]
 ]
 
@@ -338,7 +363,7 @@ Links:
       ]
     ]
   ][
-    #one-by-one(start: 3)[
+    #one-by-one(start: 2)[
     #text(small-size)[
     #align(horizon)[
       $
@@ -474,6 +499,129 @@ Links:
       }
       ```
     ]]]]
+]
+
+
+#simple-slide[
+  ===== What About Fibonacci? Is it the root of all evil?
+
+  #toolbox.side-by-side(columns: (40%, 60%))[
+    #one-by-one(start: 1)[
+    #text(tiny-size)[
+      #codly(highlights: (
+        (line: 2, start: 9, end: 14, fill: green),
+        (line: 3, start: 16, end: 16, fill: blue),
+        (line: 3, start: 9, end: 14, fill: yellow),
+        (line: 5, start: 21, end: 25, fill: orange),
+        (line: 5, start: 12, end: 12, fill: teal),
+        (line: 5, start: 14, end: 14, fill: fuchsia),
+        (line: 5, start: 5, end: 10, fill: yellow),
+        (line: 2, start: 5, end: 8, fill: red),
+        (line: 2, start: 15, fill: red),
+        (line: 4, start: 5, end: 5, fill: red),
+        (line: 5, start: 16, end: 20, fill: red),
+        (line: 5, start: 26, fill: red),
+      ))
+      ```cpp
+      int fib(int n) {
+          if (n <= 1) {
+              return n;
+          }
+          return fib(n - 1) + fib(n - 2);
+      }
+      ```
+
+      ```cpp
+      int fib(int n) {
+          int fib_n_1 = 0;
+          int a = 0; // fib(0)
+          int b = 1; // fib(1)
+          for (int i = 2; i <= n - 1; ++i) {
+              int temp = a + b;
+              a = b;
+              b = temp;
+          }
+          fib_n_1 = b; // fib(n-1)
+
+          int fib_n_2 = 0;
+          a = 0; // fib(0)
+          b = 1; // fib(1)
+          for (i = 2; i <= n - 2; ++i) {
+              int temp = a + b;
+              a = b;
+              b = temp;
+          }
+          fib_n_2 = b; // fib(n-2)
+
+          return fib_n_1 + fib_n_2;
+      }
+      ```
+  ]]][
+
+  ]
+
+]
+
+#simple-slide[
+  ===== What About Fibonacci? Is it the root of all evil?
+
+  #toolbox.side-by-side(columns: (40%, 60%))[
+    #one-by-one(start: 1)[
+    #text(small-size)[
+      #codly(highlights: (
+        (line: 2, start: 9, end: 14, fill: green),
+        (line: 3, start: 16, end: 16, fill: blue),
+        (line: 3, start: 9, end: 14, fill: yellow),
+        (line: 5, start: 21, end: 25, fill: orange),
+        (line: 5, start: 12, end: 12, fill: teal),
+        (line: 5, start: 14, end: 14, fill: fuchsia),
+        (line: 5, start: 5, end: 10, fill: yellow),
+        (line: 2, start: 5, end: 8, fill: red),
+        (line: 2, start: 15, fill: red),
+        (line: 4, start: 5, end: 5, fill: red),
+        (line: 5, start: 16, end: 20, fill: red),
+        (line: 5, start: 26, fill: red),
+      ))
+      ```cpp
+      int fib(int n) {
+          if (n <= 1) {
+              return n;
+          }
+          return fib(n - 1) + fib(n - 2);
+      }
+      ```
+
+      ```cpp
+      int fib_iter_gen(int n) {
+          int fib_n_1 = 0;
+          int a = 0; // fib(0)
+          int b = 1; // fib(1)
+          // Cal up to n-1
+          for (int i = 2; i <= n - 1; ++i) {
+              int temp = a + b; // fib(i) = fib(i-2) + fib(i-1)
+              a = b;           // Update fib(i-2) to fib(i-1)
+              b = temp;       // Update fib(i-1) to fib(i)
+          }
+          fib_n_1 = b; // fib(n-1)
+
+          int fib_n_2 = 0;
+          a = 0; // fib(0)
+          b = 1; // fib(1)
+          // Cal up to n-2
+          for (i = 2; i <= n - 2; ++i) {
+              int temp = a + b; // fib(i) = fib(i-2) + fib(i-1)
+              a = b;           // Update fib(i-2) to fib(i-1)
+              b = temp;       // Update fib(i-1) to fib(i)
+          }
+          fib_n_2 = b; // fib(n-2)
+
+          return fib_n_1 + fib_n_2; // fib(n)
+      }
+      ```
+  ]]][
+
+  ]
+
 ]
 
 // #hidden-bibliography(
