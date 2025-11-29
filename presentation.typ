@@ -11,6 +11,10 @@ Links:
 #codly(number-format: none) // #codly(number-format: it => [#it])
 #codly(languages: codly-languages)
 
+#import "@preview/cades:0.3.1": qr-code
+
+
+
 #let background = white // silver
 #let foreground = navy
 #let link-background = maroon // eastern
@@ -44,22 +48,30 @@ Links:
 
 #title-slide[
   = Your Optimizing Compiler is Not Optimizing Enough. To Hell With Multiple Recursions!
-  #v(2em)
 
-  Federico Bruzzone, #footnote[
-    ADAPT Lab -- Università degli Studi di Milano, \
-    #h(1.5em) Website: #link("https://federicobruzzone.github.io/")[federicobruzzone.github.io], \
-    #h(1.5em) Github: #link("https://github.com/FedericoBruzzone")[github.com/FedericoBruzzone], \
-    #h(1.5em) Email: #link("mailto:federico.bruzzone@unimi.it")[federico.bruzzone\@unimi.it]
-  ] PhD Student
+  #toolbox.side-by-side(columns: (5fr, 1fr))[
+    Federico Bruzzone, #footnote[
+      ADAPT Lab -- Università degli Studi di Milano, \
+      #h(1.5em) Website: #link("https://federicobruzzone.github.io/")[federicobruzzone.github.io], \
+      #h(1.5em) Github: #link("https://github.com/FedericoBruzzone")[github.com/FedericoBruzzone], \
+      #h(1.5em) Email: #link("mailto:federico.bruzzone@unimi.it")[federico.bruzzone\@unimi.it] \
+      #h(1.5em) Slides: #link("https://federicobruzzone.github.io/activities/presentations/your-optimizing-compiler-is-not-optimizing-enough.pdf")[federicobruzzone.github.io/activities/presentations/your-optimizing-compiler-is-not-optimizing-enough.pdf]
+    ] PhD Student
 
-  Milan, Italy -- #datetime.today().display("[day] [month repr:long] [year repr:full]")
+    // Milan, Italy -- #datetime.today().display("[day] [month repr:long] [year repr:full]")
+    Milan, Italy -- 4 December 2025
+  ][
+    // #text(small-size)[
+    //     Slides available at
+    //     #v(-1em)
+    //     #link("https://federicobruzzone.github.io/activities/presentations/P4-compiler-in-SDN.pdf")[federicobruzzone.github.io/activities/presentations/P4-compiler-in-SDN.pdf]
+    // ]
+    #move(dy: 10pt, dx: -50pt)[
+      #qr-code("https://federicobruzzone.github.io/", width: 6cm)
+    ]
+  ]
 
-  // #text(small-size)[
-  //     Slides available at
-  //     #v(-1em)
-  //     #link("https://federicobruzzone.github.io/activities/presentations/P4-compiler-in-SDN.pdf")[federicobruzzone.github.io/activities/presentations/P4-compiler-in-SDN.pdf]
-  // ]
+
 ]
 
 
@@ -414,7 +426,7 @@ Links:
         }
         ```
 
-        The replacement of $n * ((n - 1) * (n - 2))$ by $(n * (n - 1)) * (n - 2)$ is valid due to the *associativity* of multiplication.
+        The replacement of $n * ((n - 1) * (n - 2))$ by $(n * (n - 1)) * (n - 2)$ is valid due to the *associativity* of multiplication. In the general form:
 
         $
           & bold(f)(x) = { \
