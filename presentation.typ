@@ -4,6 +4,7 @@ Links:
 */
 
 #import "./theme/fcb.typ": *
+#import "@preview/cades:0.3.1": qr-code
 #import "@preview/codly:1.3.0": *
 #import "@preview/codly-languages:0.1.1": *
 #show: codly-init.with()
@@ -11,7 +12,6 @@ Links:
 #codly(number-format: none) // #codly(number-format: it => [#it])
 #codly(languages: codly-languages)
 
-#import "@preview/cades:0.3.1": qr-code
 
 
 
@@ -67,7 +67,7 @@ Links:
     //     #link("https://federicobruzzone.github.io/activities/presentations/P4-compiler-in-SDN.pdf")[federicobruzzone.github.io/activities/presentations/P4-compiler-in-SDN.pdf]
     // ]
     #move(dy: 10pt, dx: -50pt)[
-      #qr-code("https://federicobruzzone.github.io/", width: 6cm)
+      #qr-code("https://federicobruzzone.github.io/activities/presentations/your-optimizing-compiler-is-not-optimizing-enough.pdf", width: 6cm)
     ]
   ]
 
@@ -363,7 +363,7 @@ Links:
       #text(small-size)[
         To transform recursive function $bold(f)$ into iterative form, we need to:
 
-        1. Identifies an increment $xor$ to the argument of $bold(f)$, i.e., $x' = x xor y$ such that $x = italic("prev")(x')$, where $italic("prev")$ is based on the arguments of the recursive call. In this case, $italic("prev")(x) = d(x)$ and, if $d^(-1)$ exists, $x xor y = d^(-1)(x)$, can be plugged in for $y$.
+        1. Identifies an increment $xor$ to the argument of $bold(f)$, _id est_, $x' = x xor y$ such that $x = italic("prev")(x')$, where $italic("prev")$ is based on the arguments of the recursive call. In this case, $italic("prev")(x) = d(x)$ and, if $d^(-1)$ exists, $x xor y = d^(-1)(x)$, can be plugged in for $y$.
         2. Derives an incremental program $bold(f)'(x, r)$ that computes $bold(f)(x)$ using an accumulator $r$ of $bold(f)(italic("prev")(x))$.
         3. Forms an iterative version that initializes using the base case of $bold(f)$ and iteratively applies $bold(f)'$ until reaching the desired argument.
       ]
@@ -375,11 +375,11 @@ Links:
           $
             & bold(f)(x) = { \
             & #h(1cm) x_1 = x_0; r = b(x_0); \
-            & #h(1cm) "while" (x_1 != x) { \
+            & #h(1cm) bold("while") (x_1 != x) { \
             & #h(2cm) x_1 = d^(-1)(x_1); \
             & #h(2cm) r = a(x_1, r); \
             & #h(1cm) } \
-            & #h(1cm) "return" r; \
+            & #h(1cm) bold("return") r; \
             & }
           $
         ]]
@@ -431,11 +431,11 @@ Links:
         $
           & bold(f)(x) = { \
           & #h(1cm) r = b(x_0); \
-          & #h(1cm) "while" (x != x_0) { \
+          & #h(1cm) bold("while") (x != x_0) { \
           & #h(2cm) r = a(r, a_1(x)); \
           & #h(2cm) x = d(x); \
           & #h(1cm) } \
-          & #h(1cm) "return" r; \
+          & #h(1cm) bold("return") r; \
           & }
         $
       ]][
@@ -451,7 +451,8 @@ Links:
       ]]][
     #one-by-one(start: 3)[
       #align(horizon)[#text(tiny-size)[
-        "```bash clang -O3 -S -emit-llvm fact.c -o -```" produces the following LLVM IR:
+        "```bash clang -O3 -S -emit-llvm fact.c -o -```" produces something like: \
+        _The basic blocks related to loop vectorization (for performing SIMD operations) have been omitted for clarity_
 
         #codly(highlights: (
           (line: 3, start: 3, fill: green),
@@ -562,9 +563,7 @@ Links:
     #text(tiny-size)[
 
       #align(center)[
-        Note that, this LLVM IR is a fixed-point representation of the `fib` function; observable by the output of
-
-        "```bash opt -passes="default<O3>" -S fib.ll -o -```" (it will produce the same IR as above).
+        Note that, the following LLVM IR is a fixed-point representation of the `fib` function; observable by the output of "```bash opt -passes="default<O3>" -S fib-O3.ll -o -```"
       ]
 
 
@@ -631,12 +630,13 @@ Links:
 ]
 
 #focus-slide[
-  = So, Is It Possible to Incrementalize Functions with Multiple Recursions?
+  = So your compiler is unable to _incrementalize_ functions with multiple recursions?
+  Apparently, yes.
 ]
 
 
 #simple-slide[
-  = The Incrementalization of Y. A. Liu
+  = The Y. A. Liu's Incrementalization
 
   #align(horizon)[
   #toolbox.side-by-side(columns: (1fr, 3fr))[
@@ -649,7 +649,7 @@ Links:
     #text(small-size)[
       In 1990, Liu _et al._ have done extensive research on *Incrementalization* @Liu99 @Liu98 @Liu95 @Liu95b.
 
-      Even in presence of multiple recursions, in #cite(<Liu99>, supplement: "Sect. 7"), they proposed a *systematic* approach (_static analysis_ and _semantic-preserving transformations_) to derive an incremental program following the three steps outlined earlier (slide "_From Recursion to Iteration_").
+      Even in presence of multiple recursions, in #cite(<Liu99>, supplement: "Sect. 7"), they proposed a *systematic* approach (_static analysis_ and _semantic-preserving transformations_) to derive an incremental program following the three steps outlined earlier (cf. slide "_From Recursion to Iteration_").
 
       But the Step 2. builds upon the principles of @Liu98 and @Liu95 --- which, typically rely on user-provided knowledge or a theorem prover to derive the incremental program.
     ]
@@ -663,9 +663,9 @@ Links:
 
   The papers are a little bit old-fashioned, and the key aspect of deriving the incremental program in presence of multiple recursions is *opaque*.
 
-  I wrote an email to Y.A. Liu asking for clarification last week, but I haven't received a reply yet 🥲.
+  I wrote an email to Y.A. Liu asking for clarification last week, but I haven't received a reply yet ... 🥲
 
-  _Despite her work, we are trying to understand whether it is really possible to make the transformation._
+  _Despite her work, we are trying to understand whether it is really possible to make the transformation automatically in a "general" setting._
 ]]
 
 // #hidden-bibliography(
