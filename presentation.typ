@@ -1,8 +1,3 @@
-/*
-Links:
-  - http://wpage.unina.it/rcanonic/didattica/dcn/lucidi/DCN-L08-L09-OpenFlow.pdf
-*/
-
 #import "./theme/fcb.typ": *
 #import "@preview/cades:0.3.1": qr-code
 #import "@preview/codly:1.3.0": *
@@ -11,9 +6,6 @@ Links:
 // #codly(zebra-fill: none)
 #codly(number-format: none) // #codly(number-format: it => [#it])
 #codly(languages: codly-languages)
-
-
-
 
 #let background = white // silver
 #let foreground = navy
