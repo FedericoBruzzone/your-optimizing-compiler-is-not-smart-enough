@@ -656,6 +656,18 @@ Links:
   ]]
 ]
 
+#simple-slide[#align(center)[
+  = Conclusions
+
+  #v(1em)
+
+  The papers are a little bit old-fashioned, and the key aspect of deriving the incremental program in presence of multiple recursions is *opaque*.
+
+  I wrote an email to Y.A. Liu asking for clarification last week, but I haven't received a reply yet 🥲.
+
+  _Despite her work, we are trying to understand whether it is really possible to make the transformation._
+]]
+
 // #hidden-bibliography(
 #text(small-size)[
   #bibliography("local.bib")
