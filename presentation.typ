@@ -638,7 +638,7 @@
 
   Last week I wrote an email to Liu asking for clarification, and two days ago I received a kind reply directing me to @Liu24 (2024)---which confirms my understanding of the situation.
 
-  _Despite her work, we are trying to understand whether it is really possible to rely exclusively on static analysis steps to automatically perform the transformation in a “general” context._
+  _We are trying to understand whether it is really possible to rely exclusively on static analysis steps to automatically perform the transformation in a “general” context._
 ]]
 
 #focus-slide[
