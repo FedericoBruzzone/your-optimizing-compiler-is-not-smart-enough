@@ -48,7 +48,7 @@
       #h(1.5em) Github: #link("https://github.com/FedericoBruzzone")[github.com/FedericoBruzzone], \
       #h(1.5em) Email: #link("mailto:federico.bruzzone@unimi.it")[federico.bruzzone\@unimi.it] \
       #h(1.5em) Slides: #link("https://federicobruzzone.github.io/activities/presentations/your-optimizing-compiler-is-not-optimizing-enough.pdf")[federicobruzzone.github.io/activities/presentations/your-optimizing-compiler-is-not-optimizing-enough.pdf]
-    ] PhD Student
+    ] PhD Candidate
 
     // Milan, Italy -- #datetime.today().display("[day] [month repr:long] [year repr:full]")
     Milan, Italy -- 4 December 2025
@@ -89,27 +89,6 @@
 
 #focus-slide[
   In the absence of either empirically measured or theoretically justified performance issues, programmers should *avoid* making optimizations based *solely* on assumptions about potential performance gains.
-]
-
-#simple-slide[
-
-  #toolbox.side-by-side(columns: (2fr, 1fr))[
-    #align(horizon + center)[
-      === Compilers as Musical Compositions
-
-      #v(1em)
-
-      Compilers are frequently perceived as intricate musical compositions---like the unfinished _J. S. Bach’s Art of Fugue_---where mathematical precision and logical interplay guide each part.
-
-      Every module enters in perfect timing, weaving together a structure that only the keenest ears can fully grasp.
-    ]
-  ][
-    #figure(
-      image("images/opt-comp.png", width: 98%),
-      numbering: none,
-      caption: [#text(tiny-size)[Bacon _et al._, CSUR 1994 @Bacon94]],
-    )
-  ]
 ]
 
 #centered-slide[
@@ -283,7 +262,7 @@
             ```cpp
             for (int jj = 0; jj < m; jj += TILE_SIZE)
                 for (int i = 0; i < n; ++i)
-                    for (int j = jj; j < min(jj + TILE_SIZE, m); ++j)
+                    for (int j = jj; j < MIN(jj + TILE_SIZE, m); ++j)
                         c[i][j] = a[i] * b[j];
             ```
           ]]]
@@ -375,7 +354,7 @@
             & }
           $
         ]]
-    ][
+
       #align(horizon)[#text(tiny-size)[
         #align(center)[
           #block(
@@ -384,7 +363,8 @@
             inset: 5pt,
             radius: 5pt,
           )[Note that, when $a$ is in the form $a(a_1(x), y)$ and $a$ is associative, we do not need $d^(-1)$ and $x_1$.]
-        ]]]
+        ]]
+      ]
     ]
   ]
 ]
@@ -430,7 +410,7 @@
           & #h(1cm) bold("return") r; \
           & }
         $
-      ]][
+      ]]
       #align(horizon)[#text(tiny-size)[
           #align(center)[
             #block(
@@ -440,11 +420,10 @@
               radius: 5pt,
             )[Note that, (i) when dealing with IEEE754 numbers, multiplication is *not* strictly associative, and (ii) the latter _might be_ slower due to multiply bigger numbers.]
           ]]
-      ]]][
+      ]][
     #one-by-one(start: 3)[
       #align(horizon)[#text(tiny-size)[
         "```bash clang -O3 -S -emit-llvm fact.c -o -```" produces something like: \
-        _The basic blocks related to loop vectorization (for performing SIMD operations) have been omitted for clarity_
 
         #codly(highlights: (
           (line: 3, start: 3, fill: green),
@@ -491,6 +470,8 @@
           ret i32 %acc.tr.lcssa
         }
         ```
+
+        _The basic blocks related to loop vectorization (for performing SIMD operations) have been omitted for clarity_
       ]]]]
 ]
 
@@ -621,14 +602,14 @@
   ]
 ]
 
-#focus-slide[
-  = So your compiler is unable to _incrementalize_ functions with multiple recursions?
-  Apparently, yes.
-]
+// #focus-slide[
+//   = So your compiler is unable to _incrementalize_ functions with multiple recursions?
+//   Apparently, yes.
+// ]
 
 
 #simple-slide[
-  = The Y. A. Liu's Incrementalization
+  = The Y. Annie Liu's Incrementalization
 
   #align(horizon)[
   #toolbox.side-by-side(columns: (1fr, 3fr))[
@@ -655,13 +636,38 @@
 
   The papers are a little bit old-fashioned, and the key aspect of deriving the incremental program in presence of multiple recursions is *opaque*.
 
-  I wrote an email to Y.A. Liu asking for clarification last week, but I haven't received a reply yet ... 🥲
+  Last week I wrote an email to Liu asking for clarification, and two days ago I received a kind reply directing me to @Liu24 (2024)---which confirms my understanding of the situation.
 
-  _Despite her work, we are trying to understand whether it is really possible to make the transformation automatically in a "general" setting._
+  _Despite her work, we are trying to understand whether it is really possible to rely exclusively on static analysis steps to automatically perform the transformation in a “general” context._
 ]]
+
+#focus-slide[
+  = Thank You!
+]
 
 // #hidden-bibliography(
 #text(small-size)[
   #bibliography("local.bib")
 ]
 // )
+
+
+#simple-slide[
+  #toolbox.side-by-side(columns: (2fr, 1fr))[
+    #align(horizon + center)[
+      === Compilers as Musical Compositions
+
+      #v(1em)
+
+      Compilers are frequently perceived as intricate musical compositions---like the unfinished _J. S. Bach’s Art of Fugue_---where mathematical precision and logical interplay guide each part.
+
+      Every module enters in perfect timing, weaving together a structure that only the keenest ears can fully grasp.
+    ]
+  ][
+    #figure(
+      image("images/opt-comp.png", width: 98%),
+      numbering: none,
+      caption: [#text(tiny-size)[Bacon _et al._, CSUR 1994 @Bacon94]],
+    )
+  ]
+]
