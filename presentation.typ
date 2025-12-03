@@ -636,9 +636,9 @@
 
   The papers are a little bit old-fashioned, and the key aspect of deriving the incremental program in presence of multiple recursions is *opaque*.
 
-  Last week I wrote an email to Liu asking for clarification, and two days ago I received a kind reply directing me to @Liu24 (2024)---which confirms my understanding of the situation.
+  Last week I wrote an email to Liu asking for clarification, and *two* days ago I received a kind reply directing me to @Liu24 (2024)---which confirms my understanding of the situation.
 
-  _We are trying to understand whether it is really possible to rely exclusively on static analysis steps to automatically perform the transformation in a “general” context._
+  _We are trying to understand whether it is really possible to rely exclusively on static analysis steps to automatically perform the transformation in a “general” setting, at least for a class of functions._
 ]]
 
 #focus-slide[
