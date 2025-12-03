@@ -652,22 +652,22 @@
 // )
 
 
-#simple-slide[
-  #toolbox.side-by-side(columns: (2fr, 1fr))[
-    #align(horizon + center)[
-      === Compilers as Musical Compositions
+// #simple-slide[
+//   #toolbox.side-by-side(columns: (2fr, 1fr))[
+//     #align(horizon + center)[
+//       === Compilers as Musical Compositions
 
-      #v(1em)
+//       #v(1em)
 
-      Compilers are frequently perceived as intricate musical compositions---like the unfinished _J. S. Bach’s Art of Fugue_---where mathematical precision and logical interplay guide each part.
+//       Compilers are frequently perceived as intricate musical compositions---like the unfinished _J. S. Bach’s Art of Fugue_---where mathematical precision and logical interplay guide each part.
 
-      Every module enters in perfect timing, weaving together a structure that only the keenest ears can fully grasp.
-    ]
-  ][
-    #figure(
-      image("images/opt-comp.png", width: 98%),
-      numbering: none,
-      caption: [#text(tiny-size)[Bacon _et al._, CSUR 1994 @Bacon94]],
-    )
-  ]
-]
+//       Every module enters in perfect timing, weaving together a structure that only the keenest ears can fully grasp.
+//     ]
+//   ][
+//     #figure(
+//       image("images/opt-comp.png", width: 98%),
+//       numbering: none,
+//       caption: [#text(tiny-size)[Bacon _et al._, CSUR 1994 @Bacon94]],
+//     )
+//   ]
+// ]
