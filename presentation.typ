@@ -622,9 +622,9 @@
     #text(small-size)[
       In 1990, Liu _et al._ have done extensive research on *Incrementalization* @Liu99 @Liu98 @Liu95 @Liu95b.
 
-      Even in presence of multiple recursions, in #cite(<Liu99>, supplement: "Sect. 7"), they proposed a *systematic* approach (_static analysis_ and _semantic-preserving transformations_) to derive an incremental program following the three steps outlined earlier (cf. slide "_From Recursion to Iteration_").
+      Even in presence of *multiple recursions*, in #cite(<Liu99>, supplement: "Sect. 7"), they proposed a _systematic_ approach (_static analysis_ and _semantic-preserving transformations_) to derive an incremental program following the three steps outlined earlier (cf. slide "_From Recursion to Iteration_").
 
-      But the Step 2. builds upon the principles of @Liu98 and @Liu95 --- which, typically rely on user-provided knowledge or a theorem prover to derive the incremental program.
+      But to derive the incremental program (the Step 2.), it builds upon the principles of @Liu98 and @Liu95 --- which, typically rely on user-provided knowledge or a theorem prover.
     ]
   ]]
 ]
@@ -632,11 +632,9 @@
 #simple-slide[#align(center)[
   = Conclusions
 
-  #v(1em)
+ The incrementalization of a program in presence of multiple recursions is *opaque*, and a procedure to automatically perform such transformation seems to be *missing* in the literature.
 
-  The papers are a little bit old-fashioned, and the key aspect of deriving the incremental program in presence of multiple recursions is *opaque*.
-
-  Last week I wrote an email to Liu asking for clarification, and *two* days ago I received a kind reply directing me to @Liu24 (2024)---which confirms my understanding of the situation.
+  Last week I wrote an email to Liu asking for clarification, and *two* days ago I received a kind reply directing me to @Liu24 (2024) --- which confirms the above statements.
 
   _We are trying to understand whether it is really possible to rely exclusively on static analysis steps to automatically perform the transformation in a “general” setting, at least for a class of functions._
 ]]
